@@ -1,0 +1,349 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="theme-color" content="#07070c">
+    <meta name="description" content="PushAI — Your AI-powered productivity mentor with personality modes and human-in-the-loop intelligence.">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <title>PushAI — Premium AI Productivity</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <!-- ═══════════ LOGIN SCREEN ═══════════ -->
+    <div class="screen-login active" id="screen-login">
+        <div class="login-ambient"></div>
+        <div class="login-ambient-2"></div>
+        <div class="login-card">
+            <div class="login-logo">
+                <div class="login-logo-icon">P</div>
+                <h1>PushAI</h1>
+                <p>Your AI Productivity Mentor</p>
+            </div>
+            <div class="form-group">
+                <label class="form-label">Email</label>
+                <input id="login-email" class="form-input" type="email" placeholder="you@email.com"
+                    autocomplete="email">
+            </div>
+            <div class="form-group">
+                <label class="form-label">Password</label>
+                <input id="login-password" class="form-input" type="password" placeholder="Min 6 characters"
+                    autocomplete="current-password">
+            </div>
+            <div class="form-error" id="login-error"></div>
+            <button id="login-btn" class="btn-primary" type="button" style="margin-top:0.5rem">Sign In</button>
+            <button id="goto-signup-btn" class="btn-secondary" type="button" style="margin-top:0.75rem">Create Account</button>
+        </div>
+    </div>
+
+    <!-- ═══════════ ONBOARDING STEP 1 ═══════════ -->
+    <div class="screen-onboard-1" id="screen-onboard-1">
+        <div class="login-ambient"></div>
+        <div class="login-card">
+            <div class="onboard-progress">
+                <div class="onboard-dot active"></div>
+                <div class="onboard-dot"></div>
+            </div>
+            <div class="onboard-title">Tell us about you</div>
+            <div class="onboard-subtitle">This helps PAI personalize your experience</div>
+            <div class="form-group">
+                <label class="form-label">Your Name</label>
+                <input id="ob-name" class="form-input" type="text" placeholder="John Doe">
+            </div>
+            <div class="form-group">
+                <label class="form-label">Interests</label>
+                <input id="ob-interests" class="form-input" type="text" placeholder="AI, Design, Startups">
+            </div>
+            <div class="form-group">
+                <label class="form-label">Hobby</label>
+                <input id="ob-hobby" class="form-input" type="text" placeholder="Reading, Gaming, Music">
+            </div>
+            <div class="form-group">
+                <label class="form-label">Your Dream</label>
+                <input id="ob-dream" class="form-input" type="text" placeholder="Build the next big thing">
+            </div>
+            <div class="form-error" id="ob1-error"></div>
+            <button id="ob-next-btn" class="btn-primary" type="button" style="margin-top:0.5rem">Next →</button>
+        </div>
+    </div>
+
+    <!-- ═══════════ ONBOARDING STEP 2 ═══════════ -->
+    <div class="screen-onboard-2" id="screen-onboard-2">
+        <div class="login-ambient"></div>
+        <div class="login-card">
+            <div class="onboard-progress">
+                <div class="onboard-dot done"></div>
+                <div class="onboard-dot active"></div>
+            </div>
+            <div class="onboard-title">Your Schedule</div>
+            <div class="onboard-subtitle">Help PAI optimize your productivity windows</div>
+            <div class="form-group">
+                <label class="form-label">Age</label>
+                <input id="ob-age" class="form-input" type="number" placeholder="25" min="10" max="99">
+            </div>
+            <div class="form-row">
+                <div class="form-group">
+                    <label class="form-label">Work Time</label>
+                    <input id="ob-work-time" class="form-input" type="text" placeholder="9 AM - 5 PM">
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Free Time</label>
+                    <input id="ob-free-time" class="form-input" type="text" placeholder="6 PM - 10 PM">
+                </div>
+            </div>
+            <div class="form-error" id="ob2-error"></div>
+            <button id="ob-finish-btn" class="btn-primary" type="button" style="margin-top:0.5rem">🚀 Launch PushAI</button>
+            <button id="ob-back-btn" class="btn-secondary" type="button" style="margin-top:0.75rem">← Back</button>
+        </div>
+    </div>
+
+    <!-- ═══════════ MAIN APP ═══════════ -->
+    <div class="ambient-glow"></div>
+
+    <div class="app-shell" id="app-shell">
+        <!-- ── Bottom Nav ── -->
+        <nav class="nav-bar">
+            <button class="nav-btn active" data-view="home">
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor">
+                    <path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z" />
+                </svg>
+                <span>Home</span>
+            </button>
+            <button class="nav-btn" data-view="tasks">
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                    <line x1="8" y1="6" x2="21" y2="6" />
+                    <line x1="8" y1="12" x2="21" y2="12" />
+                    <line x1="8" y1="18" x2="21" y2="18" />
+                    <line x1="3" y1="6" x2="3.01" y2="6" />
+                    <line x1="3" y1="12" x2="3.01" y2="12" />
+                    <line x1="3" y1="18" x2="3.01" y2="18" />
+                </svg>
+                <span>Tasks</span>
+            </button>
+            <button class="nav-btn" data-view="explore">
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                    <circle cx="12" cy="12" r="10" />
+                    <polygon points="16.24 7.76 14.12 14.12 7.76 16.24 9.88 9.88 16.24 7.76" />
+                </svg>
+                <span>AI Mentor</span>
+            </button>
+            <button class="nav-btn" data-view="profile">
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                    <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2" />
+                    <circle cx="12" cy="7" r="4" />
+                </svg>
+                <span>Profile</span>
+            </button>
+        </nav>
+
+        <div class="content-area">
+
+            <!-- ═══════════ HOME ═══════════ -->
+            <section id="home-view" class="view-section active">
+                <header class="app-header">
+                    <h1 class="header-greeting" id="main-greeting">Good evening, Guest</h1>
+                    <div class="streak-badge">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M8.5 14.5A2.5 2.5 0 0 0 11 12c0-1.38-.5-2-1-3-1.072-2.143-.224-4.054 2-6 .5 2.5 2 4.9 4 6.5 2 1.6 3 3.5 3 5.5a7 7 0 1 1-14 0c0-1.153.433-2.294 1-3a2.5 2.5 0 0 0 2.5 2.5z" />
+                        </svg>
+                        <span id="streak-num">0</span>
+                    </div>
+                </header>
+
+                <!-- Hero Card -->
+                <div class="hero-card">
+                    <div class="hero-body">
+                        <span class="hero-tag" id="hero-tag">Today's Focus</span>
+                        <h2 class="hero-title" id="hero-title">Welcome to PushAI</h2>
+                    </div>
+                    <div class="hero-footer">
+                        <span class="hero-sub" id="hero-sub">Let's get productive!</span>
+                        <button class="start-btn" id="hero-btn">Start
+                            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3">
+                                <polyline points="9 18 15 12 9 6" />
+                            </svg>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Streak Bar -->
+                <div class="streak-bar">
+                    <div class="streak-ring" id="streak-ring">0</div>
+                    <div class="streak-info">
+                        <div class="streak-title">Daily Streak</div>
+                        <div class="streak-subtitle" id="streak-subtitle">Complete tasks to build your streak</div>
+                    </div>
+                    <div class="streak-checks">
+                        <div class="streak-check filled"></div>
+                        <div class="streak-check filled"></div>
+                        <div class="streak-check empty"></div>
+                    </div>
+                </div>
+
+                <!-- AI Recommended -->
+                <div class="section-title">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="var(--accent)">
+                        <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" />
+                    </svg>
+                    AI Recommended
+                </div>
+                <div id="home-tasks"></div>
+
+                <!-- Floating Mentor -->
+                <button class="fab-mentor" id="open-chat">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="white">
+                        <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z" />
+                    </svg>
+                    <span>Talk to Mentor</span>
+                </button>
+            </section>
+
+            <!-- ═══════════ TASKS ═══════════ -->
+            <section id="tasks-view" class="view-section">
+                <header class="app-header">
+                    <h1 class="header-greeting">Sprint Backlog</h1>
+                </header>
+
+                <div class="sprint-stats-card">
+                    <div class="sprint-stat">
+                        <div class="sprint-val" id="tasks-pending-count">0</div>
+                        <div class="sprint-label">Pending</div>
+                    </div>
+                    <div class="sprint-divider"></div>
+                    <div class="sprint-stat">
+                        <div class="sprint-val" style="color: var(--success);" id="tasks-done-count">0</div>
+                        <div class="sprint-label">Completed</div>
+                    </div>
+                </div>
+
+                <div class="add-task-card">
+                    <div class="add-task-title">Add Task</div>
+                    <div class="add-task-grid">
+                        <input id="new-task-title" class="task-input" type="text" placeholder="Task title" maxlength="120">
+                        <input id="new-task-date" class="task-input" type="date">
+                        <textarea id="new-task-desc" class="task-input task-textarea" placeholder="Description (optional)"></textarea>
+                        <button id="add-task-btn" class="start-btn add-task-btn" type="button">Add Task</button>
+                    </div>
+                </div>
+
+                <div class="section-title" style="margin-top: 1rem;">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                        <path d="M4 6h16M4 12h16M4 18h7" />
+                    </svg>
+                    All Tasks
+                </div>
+                <div id="all-tasks"></div>
+            </section>
+
+            <!-- ═══════════ EXPLORE (AI CHAT) ═══════════ -->
+            <section id="explore-view" class="view-section" style="padding:0;">
+                <div class="chat-container">
+                    <div class="chat-head">
+                        <div class="ai-avatar">AI</div>
+                        <div>
+                            <div class="chat-head-title">AI Mentor</div>
+                            <div class="chat-head-sub" id="chat-personality-label">FRIENDLY MODE</div>
+                        </div>
+                        <div style="flex:1"></div>
+                        <button class="info-btn" id="clear-chat-btn" title="Clear chat">
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8" />
+                                <path d="M3 3v5h5" />
+                            </svg>
+                        </button>
+                    </div>
+
+                    <div class="chat-log" id="chat-log">
+                        <div class="msg-wrap-ai">
+                            <div class="msg-ai" id="chat-welcome-msg">Hello! I'm your PAI mentor. Let's conquer your goals today. What's on your mind?</div>
+                            <div class="msg-time">AI MENTOR • NOW</div>
+                        </div>
+                    </div>
+
+                    <div class="chat-foot">
+                        <div class="quick-tags">
+                            <button type="button" class="quick-tag" data-prompt="What should I focus on today?">🎯 Focus</button>
+                            <button type="button" class="quick-tag" data-prompt="Give me a motivational push!">⚡ Motivate</button>
+                            <button type="button" class="quick-tag" data-prompt="Create a task plan for this week">📋 Plan Week</button>
+                            <button type="button" class="quick-tag" data-prompt="Summarize my progress">📊 Progress</button>
+                        </div>
+                        <div class="chat-row">
+                            <button type="button" class="plus-btn">+</button>
+                            <input type="text" id="chat-input" placeholder="Type a message..." autocomplete="off">
+                            <button type="button" class="send-btn" id="chat-send">
+                                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="3">
+                                    <polyline points="18 15 12 9 6 15" />
+                                </svg>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- ═══════════ PROFILE ═══════════ -->
+            <section id="profile-view" class="view-section">
+                <header class="app-header">
+                    <h1 class="header-greeting">Settings</h1>
+                </header>
+                <div style="margin: 0 1.25rem;">
+                    <!-- AI Personality Mode -->
+                    <div class="settings-card">
+                        <div class="add-task-title">🧠 AI Personality</div>
+                        <div class="settings-sub" style="margin-bottom: 0.75rem;">Choose how your AI mentor communicates</div>
+                        <div class="personality-selector" id="personality-selector">
+                            <button class="personality-pill" data-mode="strict">
+                                <span class="pill-emoji">⚡</span>
+                                Strict
+                            </button>
+                            <button class="personality-pill active" data-mode="friendly">
+                                <span class="pill-emoji">😊</span>
+                                Friendly
+                            </button>
+                            <button class="personality-pill" data-mode="coach">
+                                <span class="pill-emoji">🧠</span>
+                                Coach
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- App Settings -->
+                    <div class="settings-card">
+                        <div class="add-task-title">App Settings</div>
+                        <div class="settings-row">
+                            <div>
+                                <div class="settings-label">Theme</div>
+                                <div class="settings-sub">Switch between dark and light</div>
+                            </div>
+                            <button id="theme-toggle-btn" class="ghost-btn settings-action" type="button">Use Light</button>
+                        </div>
+                        <div class="settings-row">
+                            <div>
+                                <div class="settings-label">Account</div>
+                                <div class="settings-sub">Sign out from this device</div>
+                            </div>
+                            <button id="logout-btn" class="ghost-btn settings-action" type="button">Logout</button>
+                        </div>
+                    </div>
+
+                    <!-- User Profile Info -->
+                    <div class="profile-card" id="profile-info-card">
+                        <div class="add-task-title">👤 Your Profile</div>
+                        <div class="profile-info-grid" id="profile-info-grid">
+                            <!-- JS injected -->
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+        </div>
+    </div>
+
+    <script src="storage.js"></script>
+    <script src="ai.js"></script>
+    <script src="app.js"></script>
+</body>
+
+</html>

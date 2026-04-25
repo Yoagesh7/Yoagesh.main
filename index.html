@@ -208,7 +208,7 @@
             padding-top: var(--nav-height);
             position: relative;
             overflow: hidden;
-            background: linear-gradient(180deg, rgba(255,255,255,0.95) 0%, rgba(255,255,255,0.72) 56%, rgba(255,255,255,0.92) 100%);
+            background: #ffffff;
         }
 
         .hero::before,
@@ -223,7 +223,7 @@
         .hero::before {
             width: 420px;
             height: 420px;
-            background: rgba(217, 74, 26, 0.14);
+            background: transparent;
             top: 10%;
             left: -120px;
         }
@@ -231,7 +231,7 @@
         .hero::after {
             width: 360px;
             height: 360px;
-            background: rgba(217, 74, 26, 0.1);
+            background: transparent;
             right: -120px;
             bottom: 5%;
         }
@@ -313,12 +313,16 @@
 
         .hero-caption {
             position: absolute;
-            left: 57%;
+            left: 59%;
             bottom: 10%;
             transform: translate(-50%, 28px);
             z-index: 3;
             font-size: 0.9rem;
-            letter-spacing: 0.25em;
+            letter-spacing: 0.4em;
+            line-height: 1.45;
+            font-weight: 800;
+            text-align: center;
+            width: min(86vw, 520px);
             text-transform: uppercase;
             color: var(--accent);
             opacity: 0;
@@ -494,35 +498,49 @@
 
         /* Responsive */
         @media (max-width: 768px) {
+            .hero {
+                padding-top: calc(var(--nav-height) -1px);
+            }
+
             .hero-stack {
-                min-height: 72vh;
+                min-height: 50vh;
             }
 
             .hero-name-bg {
-                inset: 36% auto auto 44%;
+                inset: 35% auto auto 44%;
                 --hero-name-transform-base: translate(-50%, -50%) scaleY(1.12);
                 transform: var(--hero-name-transform-base);
                 font-size: clamp(5rem, 24vw, 9rem);
                 letter-spacing: 0.04em;
-                line-height: 7.10;
+                line-height: 1.01;
+                font-weight: 950;
                 width: 100%;
                 text-align: center;
                 color: #D94A1A;
             }
 
             .hero-image {
-                --hero-shift-x: -4%;
+                --hero-shift-x: -7%;
                 transform: translateX(var(--hero-shift-x));
             }
 
+            .hero-image::after {
+                left: 50%;
+                transform: translateX(-50%);
+                width: min(82vw, 380px);
+                height: 46%;
+                background: linear-gradient(180deg, rgba(255, 255, 255, 0) 0%, rgba(255, 255, 255, 1) 100%);
+            }
+
             .hero-caption {
-                left: 52%;
-                letter-spacing: 0.13em;
-                font-size: 0.75rem;
+                left: 45%;
+                letter-spacing: 0.08em;
+                font-size: 0.74rem;
+                width: min(86vw, 320px);
             }
 
             .hero-image img {
-                width: min(84vw, 360px);
+                width: min(80vw, 365px);
             }
 
             .menu-toggle {
@@ -711,7 +729,7 @@
                     <div class="hero-image">
                         <img src="assets/profile.png" alt="Yoagesh Profile">
                     </div>
-                    <div class="hero-caption">AI Solutions • Web Development • UI/UX Design</div>
+                    <div class="hero-caption">#AI Solutions #Web Development,<br>#UI/UX Design</div>
                 </div>
             </div>
         </section>

@@ -28,7 +28,13 @@
                 <h1 class="text-3xl font-bold mb-2">Waitlist Admin</h1>
                 <p class="text-zinc-500">View and manage early access registrations.</p>
             </div>
-            <button onclick="clearData()" class="bg-red-500/10 text-red-500 border border-red-500/20 px-4 py-2 rounded-lg hover:bg-red-500/20 transition-colors">Clear All Data</button>
+            <div class="flex gap-4">
+                <button onclick="loadData()" class="bg-white/5 text-white border border-white/10 px-4 py-2 rounded-lg hover:bg-white/10 transition-colors flex items-center gap-2">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M23 4v6h-6M1 20v-6h6M3.51 9a9 9 0 0 1 14.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0 0 20.49 15"/></svg>
+                    Refresh
+                </button>
+                <button onclick="clearData()" class="bg-red-500/10 text-red-500 border border-red-500/20 px-4 py-2 rounded-lg hover:bg-red-500/20 transition-colors">Clear All Data</button>
+            </div>
         </div>
 
         <div class="glass-panel rounded-2xl overflow-hidden">
@@ -66,19 +72,25 @@
             const waitlist = JSON.parse(localStorage.getItem('partnerai_waitlist') || '[]');
             const tbody = document.getElementById('dataBody');
             const noData = document.getElementById('noData');
+            const dataTable = document.getElementById('dataTable');
 
-            if (waitlist.length === 0) {
+            if (!waitlist || waitlist.length === 0) {
                 noData.classList.remove('hidden');
+                dataTable.classList.add('hidden');
+                tbody.innerHTML = '';
                 return;
             }
 
-            tbody.innerHTML = waitlist.reverse().map(user => `
+            noData.classList.add('hidden');
+            dataTable.classList.remove('hidden');
+
+            tbody.innerHTML = [...waitlist].reverse().map(user => `
                 <tr>
-                    <td class="text-xs text-zinc-500">${user.date}</td>
-                    <td class="font-bold text-white">${user.name}</td>
-                    <td class="text-zinc-400">${user.email}</td>
-                    <td class="text-zinc-400">${user.age}</td>
-                    <td class="text-zinc-400">${user.profession}</td>
+                    <td class="text-xs text-zinc-500">${user.date || 'N/A'}</td>
+                    <td class="font-bold text-white">${user.name || 'Anonymous'}</td>
+                    <td class="text-zinc-400">${user.email || 'N/A'}</td>
+                    <td class="text-zinc-400">${user.age || 'N/A'}</td>
+                    <td class="text-zinc-400">${user.profession || 'N/A'}</td>
                 </tr>
             `).join('');
         }

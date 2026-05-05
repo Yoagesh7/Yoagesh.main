@@ -556,6 +556,8 @@
     if (wForm) {
         wForm.addEventListener('submit', (e) => {
             e.preventDefault();
+            console.log('Form submitted');
+            
             const userData = {
                 name: document.getElementById('userName').value,
                 email: document.getElementById('userEmail').value,
@@ -563,11 +565,21 @@
                 profession: document.getElementById('userProfession').value,
                 date: new Date().toLocaleString()
             };
-            let waitlist = JSON.parse(localStorage.getItem('partnerai_waitlist') || '[]');
-            waitlist.push(userData);
-            localStorage.setItem('partnerai_waitlist', JSON.stringify(waitlist));
-            wForm.classList.add('hidden');
-            wSuccess.classList.remove('hidden');
+            
+            console.log('Saving user data:', userData);
+            
+            try {
+                let waitlist = JSON.parse(localStorage.getItem('partnerai_waitlist') || '[]');
+                waitlist.push(userData);
+                localStorage.setItem('partnerai_waitlist', JSON.stringify(waitlist));
+                console.log('Data saved successfully. Total entries:', waitlist.length);
+                
+                wForm.classList.add('hidden');
+                wSuccess.classList.remove('hidden');
+            } catch (err) {
+                console.error('Error saving to localStorage:', err);
+                alert('There was an error saving your registration. Please try again.');
+            }
         });
     }
 

@@ -1,0 +1,586 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>PartnerAI - Your AI Partner That Thinks, Plans &amp; Executes With You</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&amp;family=Space+Grotesk:wght@500&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "on-tertiary-fixed": "#301400",
+                    "surface-container-lowest": "#0e0e0e",
+                    "primary-fixed": "#eaddff",
+                    "surface-container": "#1f1f1f",
+                    "error-container": "#93000a",
+                    "tertiary": "#ffb784",
+                    "surface-bright": "#393939",
+                    "on-primary-fixed-variant": "#5a00c6",
+                    "inverse-on-surface": "#303030",
+                    "on-secondary-container": "#bea8ff",
+                    "on-tertiary-fixed-variant": "#713700",
+                    "surface-variant": "#353535",
+                    "error": "#ffb4ab",
+                    "primary": "#d2bbff",
+                    "on-primary": "#3f008e",
+                    "surface-container-high": "#2a2a2a",
+                    "surface-tint": "#d2bbff",
+                    "on-error": "#690005",
+                    "primary-container": "#4a3f7a",
+                    "tertiary-fixed": "#ffdcc6",
+                    "on-secondary-fixed-variant": "#4f319c",
+                    "on-surface-variant": "#ccc3d8",
+                    "surface-container-highest": "#353535",
+                    "secondary-fixed-dim": "#cebdff",
+                    "secondary-container": "#4f319c",
+                    "on-tertiary-container": "#ffe0cd",
+                    "primary-fixed-dim": "#d2bbff",
+                    "tertiary-fixed-dim": "#ffb784",
+                    "on-surface": "#e2e2e2",
+                    "on-secondary": "#381385",
+                    "on-tertiary": "#4f2500",
+                    "on-error-container": "#ffdad6",
+                    "secondary": "#cebdff",
+                    "inverse-primary": "#732ee4",
+                    "surface-dim": "#131313",
+                    "inverse-surface": "#e2e2e2",
+                    "secondary-fixed": "#e8ddff",
+                    "surface-container-low": "#1b1b1b",
+                    "surface": "#131313",
+                    "on-secondary-fixed": "#21005e",
+                    "on-background": "#e2e2e2",
+                    "tertiary-container": "#a15100",
+                    "on-primary-fixed": "#25005a",
+                    "background": "#131313",
+                    "on-primary-container": "#ede0ff",
+                    "outline-variant": "#4a4455",
+                    "outline": "#958da1"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.25rem",
+                    "lg": "0.5rem",
+                    "xl": "0.75rem",
+                    "full": "9999px"
+            },
+            "spacing": {
+                    "stack-md": "16px",
+                    "stack-lg": "32px",
+                    "container-max": "1280px",
+                    "margin": "48px",
+                    "gutter": "24px",
+                    "stack-sm": "8px",
+                    "unit": "4px"
+            },
+            "fontFamily": {
+                    "body-md": ["Inter"],
+                    "body-lg": ["Inter"],
+                    "label-caps": ["Space Grotesk"],
+                    "h1": ["Inter"],
+                    "h2": ["Inter"]
+            },
+            "fontSize": {
+                    "body-md": ["16px", {"lineHeight": "1.5", "fontWeight": "400"}],
+                    "body-lg": ["18px", {"lineHeight": "1.6", "fontWeight": "400"}],
+                    "label-caps": ["12px", {"lineHeight": "1", "letterSpacing": "0.1em", "fontWeight": "500"}],
+                    "h1": ["48px", {"lineHeight": "1.1", "letterSpacing": "-0.04em", "fontWeight": "700"}],
+                    "h2": ["32px", {"lineHeight": "1.2", "letterSpacing": "-0.02em", "fontWeight": "600"}]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        .material-symbols-outlined {
+          font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        
+        .glass-panel {
+            background: rgba(255, 255, 255, 0.03);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .glow-effect {
+            box-shadow: 0 0 40px rgba(124, 58, 237, 0.2);
+        }
+
+        /* Seamless Infinite Wave Animation */
+        @keyframes wave-flow {
+          0% { transform: translateX(0); }
+          100% { transform: translateX(-1440px); }
+        }
+
+        .wave-container {
+          position: absolute;
+          width: 2880px; /* Exact width for two tiles */
+          height: 100%;
+          top: 0;
+          left: 0;
+          z-index: -1;
+          pointer-events: none;
+          animation: wave-flow 30s linear infinite;
+          will-change: transform;
+        }
+
+        .wave-path {
+          fill: url(#wave-gradient);
+        }
+
+        .text-depth {
+            text-shadow: 0 2px 4px rgba(0,0,0,0.3), 0 4px 12px rgba(0,0,0,0.1);
+        }
+
+        .evolution-step {
+          position: relative;
+          padding-left: 2rem;
+          border-left: 2px solid rgba(124, 58, 237, 0.3);
+        }
+
+        .evolution-step::before {
+          content: '';
+          position: absolute;
+          left: -7px;
+          top: 0;
+          width: 12px;
+          height: 12px;
+          border-radius: 50%;
+          background: #7c3aed;
+          box-shadow: 0 0 15px rgba(124, 58, 237, 0.6);
+        }
+
+        /* Mobile Typography Overrides */
+        @media (max-width: 768px) {
+            .font-h1 { font-size: 28px !important; line-height: 1.2 !important; }
+            .font-h2 { font-size: 24px !important; }
+            .font-body-lg { font-size: 16px !important; }
+            .mobile-wave-path { stop-color: #6d5da1 !important; } /* Lighter/different color for mobile */
+        }
+    </style>
+</head>
+<body class="bg-[#000000] text-on-surface font-body-md text-body-md overflow-x-hidden antialiased selection:bg-primary-container selection:text-white">
+<!-- TopNavBar -->
+<nav class="fixed top-0 w-full z-50 border-b border-white/10 bg-black/60 backdrop-blur-[20px] shadow-none">
+<div class="flex justify-between items-center px-6 md:px-8 py-4 max-w-7xl mx-auto">
+<div class="text-xl font-bold tracking-tighter text-white">PartnerAI</div>
+<div class="hidden md:flex gap-8">
+<a class="font-['Inter'] text-sm font-medium tracking-tight text-zinc-400 hover:text-white hover:drop-shadow-[0_0_15px_rgba(124,58,237,0.4)] transition-all duration-300" href="#">Features</a>
+<a class="font-['Inter'] text-sm font-medium tracking-tight text-zinc-400 hover:text-white hover:drop-shadow-[0_0_15px_rgba(124,58,237,0.4)] transition-all duration-300" href="#">Solutions</a>
+<a class="font-['Inter'] text-sm font-medium tracking-tight text-zinc-400 hover:text-white hover:drop-shadow-[0_0_15px_rgba(124,58,237,0.4)] transition-all duration-300" href="#">Pricing</a>
+<a class="font-['Inter'] text-sm font-medium tracking-tight text-zinc-400 hover:text-white hover:drop-shadow-[0_0_15px_rgba(124,58,237,0.4)] transition-all duration-300" href="#">About</a>
+</div>
+<a href="#waitlist" class="bg-primary-container text-white px-4 py-2 rounded-lg font-['Inter'] text-sm font-medium tracking-tight hover:shadow-[0_0_40px_rgba(74,63,122,0.2)] transition-all duration-300 transform hover:scale-[1.02] active:scale-95">Join Waitlist</a>
+</div>
+</nav>
+<!-- Hero Section -->
+<section class="relative overflow-hidden px-6 md:px-8 pt-48 md:pt-60 pb-32 md:pb-48" id="hero-section">
+<!-- Interactive Waves with Depth -->
+<div class="wave-container opacity-60 blur-[30px]" id="interactive-wave-1" style="top: 80px;">
+<svg class="w-full h-full" preserveaspectratio="none" viewbox="0 0 2880 320" xmlns="http://www.w3.org/2000/svg">
+<defs>
+<lineargradient id="wave-gradient" x1="0%" x2="0%" y1="0%" y2="100%">
+<stop class="mobile-wave-path" offset="0%" style="stop-color:#4a3f7a;stop-opacity:1"></stop>
+<stop class="mobile-wave-path" offset="50%" style="stop-color:#4a3f7a;stop-opacity:0.6"></stop>
+<stop offset="100%" style="stop-color:#000000;stop-opacity:0"></stop>
+</lineargradient>
+</defs>
+<path class="wave-path" d="M0,160L48,176C96,192,192,224,288,213.3C384,203,480,149,576,144C672,139,768,181,864,181.3C960,181,1056,139,1152,122.7C1248,107,1344,117,1392,122.7L1440,128L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z"></path>
+<path class="wave-path" d="M0,160L48,176C96,192,192,224,288,213.3C384,203,480,149,576,144C672,139,768,181,864,181.3C960,181,1056,139,1152,122.7C1248,107,1344,117,1392,122.7L1440,128L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z" transform="translate(1440, 0)"></path>
+</svg>
+</div>
+<div class="wave-container opacity-40 blur-[50px]" id="interactive-wave-2" style="top: 80px; animation-delay: -15s; animation-direction: reverse;">
+<svg class="w-full h-full" preserveaspectratio="none" viewbox="0 0 2880 320" xmlns="http://www.w3.org/2000/svg">
+<path class="wave-path" d="M0,160L48,176C96,192,192,224,288,213.3C384,203,480,149,576,144C672,139,768,181,864,181.3C960,181,1056,139,1152,122.7C1248,107,1344,117,1392,122.7L1440,128L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z"></path>
+<path class="wave-path" d="M0,160L48,176C96,192,192,224,288,213.3C384,203,480,149,576,144C672,139,768,181,864,181.3C960,181,1056,139,1152,122.7C1248,107,1344,117,1392,122.7L1440,128L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z" transform="translate(1440, 0)"></path>
+</svg>
+</div>
+<div class="max-w-7xl mx-auto grid grid-cols-1 gap-12 md:gap-16 items-center">
+<div class="flex flex-col gap-6 md:gap-8 z-10 items-center text-center">
+<h1 class="font-h1 text-h1 text-white leading-tight max-w-4xl mx-auto text-depth">Your AI Partner That Thinks, Plans &amp; Executes With You</h1>
+<p class="font-body-lg text-body-lg text-zinc-400 max-w-xl mx-auto">Not just another chatbot — PartnerAI helps you stay consistent, productive, and focused daily.</p>
+<div class="flex flex-row gap-3 mt-4 justify-center w-full">
+<a href="https://pai-v1-ai.vercel.app/" target="_blank" class="bg-primary-container text-white px-8 py-3 rounded-lg font-medium hover:shadow-[0_0_40px_rgba(74,63,122,0.4)] transition-all duration-300 transform hover:scale-[1.02] active:scale-95 flex items-center justify-center gap-2">
+                    Try Demo <span class="material-symbols-outlined text-[18px]">arrow_forward</span>
+</a>
+<a href="#waitlist" class="glass-panel text-white px-6 py-3 rounded-lg font-medium hover:bg-white/5 transition-all duration-300 transform hover:scale-[1.02] active:scale-95 text-sm md:text-base">
+                    Join Waitlist
+                </a>
+</div>
+</div>
+</div>
+</section>
+<!-- Intelligent Infrastructure & New Flow -->
+<section class="px-6 md:px-8 relative z-10 bg-[#000000] pb-24 md:pb-32 pt-16 md:pt-24" id="infrastructure">
+    <div class="max-w-7xl mx-auto">
+        <!-- Infrastructure Heading -->
+        <div class="text-center mb-16 md:mb-20">
+            <h2 class="font-h2 text-h2 text-white mb-4 text-depth">Intelligent Infrastructure</h2>
+            <p class="font-body-lg text-body-lg text-zinc-400 max-w-2xl mx-auto">Everything you need to orchestrate your daily operations, powered by a cognitive engine that adapts to your workflow.</p>
+        </div>
+
+        <!-- The Vision & Live Demo -->
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center mb-32">
+            <!-- Images on the left -->
+            <div class="flex justify-center items-center gap-4 md:gap-8 order-2 lg:order-1">
+                <!-- Mobile Screenshot 1 -->
+                <div class="relative group max-w-[240px]">
+                    <div class="absolute -inset-1 bg-gradient-to-r from-primary-container to-purple-600 rounded-[3rem] blur opacity-25 group-hover:opacity-50 transition duration-1000"></div>
+                    <div class="relative bg-black rounded-[2.2rem] border-8 border-zinc-900 overflow-hidden shadow-2xl transform group-hover:scale-[1.05] transition-transform duration-500">
+                        <img src="Screenshot_2026-05-05-20-16-15-644_com.brave.browser.jpg" alt="PartnerAI App Home" class="w-full h-auto">
+                    </div>
+                </div>
+                <!-- Mobile Screenshot 2 -->
+                <div class="relative group max-w-[240px] mt-12">
+                    <div class="absolute -inset-1 bg-gradient-to-r from-purple-600 to-primary-container rounded-[3rem] blur opacity-25 group-hover:opacity-50 transition duration-1000"></div>
+                    <div class="relative bg-black rounded-[2.2rem] border-8 border-zinc-900 overflow-hidden shadow-2xl transform group-hover:scale-[1.05] transition-transform duration-500">
+                        <img src="screen.png" alt="PartnerAI AI Mentor" class="w-full h-auto">
+                    </div>
+                </div>
+            </div>
+            <!-- Text on the right -->
+            <div class="relative group order-1 lg:order-2">
+                <div class="absolute -inset-1 bg-gradient-to-r from-primary-container to-purple-600 rounded-2xl blur opacity-25 group-hover:opacity-50 transition duration-1000"></div>
+                <div class="relative glass-panel p-8 md:p-12 rounded-2xl">
+                    <h3 class="text-primary-container font-label-caps tracking-widest text-xs mb-4 uppercase">The Vision</h3>
+                    <h2 class="text-3xl md:text-4xl font-bold text-white mb-6 text-depth">Designed for Focus</h2>
+                    <p class="text-zinc-300 text-lg leading-relaxed mb-6">We built PartnerAI because we were tired of tools that just added to the noise. Our goal is to create a seamless interface that gets out of your way and lets you do your best work.</p>
+                    <p class="text-zinc-300 text-lg leading-relaxed">It's not about doing more; it's about doing what matters, consistently.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- PROBLEM SECTION (The Challenge) -->
+        <div class="max-w-4xl mx-auto mb-32">
+            <div class="text-center mb-12">
+                <h3 class="text-primary-container font-label-caps tracking-widest text-xs mb-4">THE CHALLENGE</h3>
+                <h2 class="font-h2 text-h2 text-white mb-4 text-depth">Why most systems fail</h2>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6 text-left">
+                <div class="flex gap-4 p-6 rounded-2xl glass-panel border-l-4 border-primary-container/50 hover:bg-white/[0.05] transition-colors duration-300">
+                    <span class="material-symbols-outlined text-primary-container">question_mark</span>
+                    <div>
+                        <h4 class="text-white font-bold mb-1">Struggling with consistency?</h4>
+                        <p class="text-zinc-400 text-sm">Do you find it hard to stick to your habits when motivation fades?</p>
+                    </div>
+                </div>
+                <div class="flex gap-4 p-6 rounded-2xl glass-panel border-l-4 border-primary-container/50 hover:bg-white/[0.05] transition-colors duration-300">
+                    <span class="material-symbols-outlined text-primary-container">question_mark</span>
+                    <div>
+                        <h4 class="text-white font-bold mb-1">Easily distracted?</h4>
+                        <p class="text-zinc-400 text-sm">Are notifications and small tasks pulling you away from deep work?</p>
+                    </div>
+                </div>
+                <div class="flex gap-4 p-6 rounded-2xl glass-panel border-l-4 border-primary-container/50 hover:bg-white/[0.05] transition-colors duration-300">
+                    <span class="material-symbols-outlined text-primary-container">question_mark</span>
+                    <div>
+                        <h4 class="text-white font-bold mb-1">Overplanning everything?</h4>
+                        <p class="text-zinc-400 text-sm">Spending too much time on the "perfect plan" and not enough on doing?</p>
+                    </div>
+                </div>
+                <div class="flex gap-4 p-6 rounded-2xl glass-panel border-l-4 border-primary-container/50 hover:bg-white/[0.05] transition-colors duration-300">
+                    <span class="material-symbols-outlined text-primary-container">question_mark</span>
+                    <div>
+                        <h4 class="text-white font-bold mb-1">Feeling constantly overwhelmed?</h4>
+                        <p class="text-zinc-400 text-sm">Is the volume of your daily tasks leading to paralysis and burnout?</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- FEATURES SECTION (Result Driven) -->
+        <div class="mb-32">
+            <h2 class="font-h2 text-h2 text-white mb-12 text-center text-depth">Built for Transformation</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <!-- AI Planner -->
+                <div class="glass-panel p-8 rounded-2xl hover:bg-white/[0.05] transition-all duration-300 group cursor-pointer border border-white/5 hover:border-primary-container/50">
+                    <div class="w-12 h-12 rounded-lg bg-primary-container/20 flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300">
+                        <span class="material-symbols-outlined text-primary-container" style="font-variation-settings: 'FILL' 1;">psychology</span>
+                    </div>
+                    <h3 class="text-xl font-semibold text-white mb-3 text-depth">AI Planner</h3>
+                    <p class="text-zinc-400 font-body-md text-body-md">Stop guessing what's next. Get an automatically optimized daily schedule that guarantees deep work sessions every single day.</p>
+                </div>
+                <!-- Smart Reminders -->
+                <div class="glass-panel p-8 rounded-2xl hover:bg-white/[0.05] transition-all duration-300 group cursor-pointer border border-white/5 hover:border-primary-container/50">
+                    <div class="w-12 h-12 rounded-lg bg-primary-container/20 flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300">
+                        <span class="material-symbols-outlined text-primary-container" style="font-variation-settings: 'FILL' 1;">notifications_active</span>
+                    </div>
+                    <h3 class="text-xl font-semibold text-white mb-3 text-depth">Smart Reminders</h3>
+                    <p class="text-zinc-400 font-body-md text-body-md">Never miss a beat. Receive context-aware nudges exactly when you have the mental energy to actually cross items off your list.</p>
+                </div>
+                <!-- Productivity Dashboard -->
+                <div class="glass-panel p-8 rounded-2xl hover:bg-white/[0.05] transition-all duration-300 group cursor-pointer border border-white/5 hover:border-primary-container/50">
+                    <div class="w-12 h-12 rounded-lg bg-primary-container/20 flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300">
+                        <span class="material-symbols-outlined text-primary-container" style="font-variation-settings: 'FILL' 1;">dashboard</span>
+                    </div>
+                    <h3 class="text-xl font-semibold text-white mb-3 text-depth">Productivity Dashboard</h3>
+                    <p class="text-zinc-400 font-body-md text-body-md">Visualize your growth. Track your velocity and focus metrics to see exactly how much faster you're moving toward your goals.</p>
+                </div>
+                <!-- Team Mode -->
+                <div class="glass-panel p-8 rounded-2xl hover:bg-white/[0.05] transition-all duration-300 group cursor-pointer border border-white/5 hover:border-primary-container/50">
+                    <div class="w-12 h-12 rounded-lg bg-primary-container/20 flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300">
+                        <span class="material-symbols-outlined text-primary-container" style="font-variation-settings: 'FILL' 1;">group_work</span>
+                    </div>
+                    <h3 class="text-xl font-semibold text-white mb-3 text-depth">Team Mode</h3>
+                    <p class="text-zinc-400 font-body-md text-body-md">Scale your impact. Delegate complex workflows to AI agents that collaborate seamlessly with your human teammates.</p>
+                </div>
+                <!-- Widget Workspace -->
+                <div class="glass-panel p-8 rounded-2xl hover:bg-white/[0.05] transition-all duration-300 group cursor-pointer border border-white/5 hover:border-primary-container/50 lg:col-span-2">
+                    <div class="w-12 h-12 rounded-lg bg-primary-container/20 flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300">
+                        <span class="material-symbols-outlined text-primary-container" style="font-variation-settings: 'FILL' 1;">widgets</span>
+                    </div>
+                    <h3 class="text-xl font-semibold text-white mb-3 text-depth">Widget Workspace</h3>
+                    <p class="text-zinc-400 font-body-md text-body-md">Build your perfect environment. Customize your workspace with modular blocks for notes, analytics, and tasks that fit your unique workflow.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- HOW IT WORKS -->
+        <div class="mb-32">
+            <h2 class="font-h2 text-h2 text-white mb-16 text-center text-depth">How It Works</h2>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8 relative">
+                <!-- Connector Line (Desktop) -->
+                <div class="hidden md:block absolute top-1/4 left-0 right-0 h-px bg-gradient-to-r from-transparent via-primary-container/30 to-transparent z-0"></div>
+                
+                <div class="relative z-10 flex flex-col items-center text-center group">
+                    <div class="w-16 h-16 rounded-full bg-black border-2 border-primary-container/50 flex items-center justify-center mb-6 group-hover:border-primary-container transition-colors duration-300 shadow-[0_0_20px_rgba(74,63,122,0.3)]">
+                        <span class="text-2xl font-bold text-white">1</span>
+                    </div>
+                    <h4 class="text-xl font-bold text-white mb-2">Add your goals</h4>
+                    <p class="text-zinc-400 text-sm">Tell PartnerAI what you want to achieve. No complex setup required.</p>
+                </div>
+                <div class="relative z-10 flex flex-col items-center text-center group">
+                    <div class="w-16 h-16 rounded-full bg-black border-2 border-primary-container/50 flex items-center justify-center mb-6 group-hover:border-primary-container transition-colors duration-300 shadow-[0_0_20px_rgba(74,63,122,0.3)]">
+                        <span class="text-2xl font-bold text-white">2</span>
+                    </div>
+                    <h4 class="text-xl font-bold text-white mb-2">AI creates your plan</h4>
+                    <p class="text-zinc-400 text-sm">Our cognitive engine builds a dynamic schedule tailored to your habits.</p>
+                </div>
+                <div class="relative z-10 flex flex-col items-center text-center group">
+                    <div class="w-16 h-16 rounded-full bg-black border-2 border-primary-container/50 flex items-center justify-center mb-6 group-hover:border-primary-container transition-colors duration-300 shadow-[0_0_20px_rgba(74,63,122,0.3)]">
+                        <span class="text-2xl font-bold text-white">3</span>
+                    </div>
+                    <h4 class="text-xl font-bold text-white mb-2">Execute with guidance</h4>
+                    <p class="text-zinc-400 text-sm">Stay in flow as PartnerAI nudges you and handles the logistics.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- SOCIAL PROOF -->
+        <div class="mb-32">
+            <h2 class="font-h2 text-h2 text-white mb-12 text-center text-depth">What users are saying</h2>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <div class="glass-panel p-8 rounded-2xl">
+                    <p class="text-zinc-300 italic mb-6">"I used to spend half my day planning. Now I just open PartnerAI and execute. It's like having a chief of staff in my pocket."</p>
+                    <div class="flex items-center gap-3">
+                        <div class="w-10 h-10 rounded-full bg-primary-container/30"></div>
+                        <div>
+                            <p class="text-white font-bold text-sm">Sarah Jenkins</p>
+                            <p class="text-zinc-500 text-xs">Product Designer</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="glass-panel p-8 rounded-2xl">
+                    <p class="text-zinc-300 italic mb-6">"The context-aware reminders are a game changer. It knows exactly when I'm in deep work and when I'm ready for the next task."</p>
+                    <div class="flex items-center gap-3">
+                        <div class="w-10 h-10 rounded-full bg-primary-container/30"></div>
+                        <div>
+                            <p class="text-white font-bold text-sm">Marcus Chen</p>
+                            <p class="text-zinc-500 text-xs">Software Engineer</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="glass-panel p-8 rounded-2xl">
+                    <p class="text-zinc-300 italic mb-6">"Finally, a system that actually helps me stay consistent. My productivity has doubled in just three weeks."</p>
+                    <div class="flex items-center gap-3">
+                        <div class="w-10 h-10 rounded-full bg-primary-container/30"></div>
+                        <div>
+                            <p class="text-white font-bold text-sm">Elena Rodriguez</p>
+                            <p class="text-zinc-500 text-xs">Founder</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- FINAL CTA SECTION -->
+        <div class="text-center py-16">
+            <h2 class="font-h1 text-4xl md:text-5xl text-white mb-8 text-depth">Stop planning. Start executing.</h2>
+            <p class="text-zinc-400 text-lg mb-10 max-w-2xl mx-auto">Join the future of productivity and reclaim your focus today.</p>
+            <div class="flex flex-col sm:flex-row gap-4 justify-center">
+                <a href="https://pai-v1-ai.vercel.app/" target="_blank" class="bg-primary-container text-white px-10 py-4 rounded-xl font-bold hover:shadow-[0_0_40px_rgba(74,63,122,0.4)] transition-all duration-300 transform hover:scale-[1.05] active:scale-95">Try Demo Now</a>
+                <a href="#waitlist" class="glass-panel text-white px-10 py-4 rounded-xl font-bold hover:bg-white/5 transition-all duration-300 border border-white/10">Join the Waitlist</a>
+            </div>
+        </div>
+
+        <!-- Waitlist Section -->
+        <section class="py-24 px-6 md:px-8 bg-black relative border-t border-white/5" id="waitlist">
+            <div class="max-w-xl mx-auto glass-panel p-8 md:p-12 rounded-[2.5rem] shadow-2xl relative overflow-hidden">
+                <div class="absolute top-0 right-0 -mr-16 -mt-16 w-32 h-32 bg-[#4a3f7a] opacity-20 blur-3xl rounded-full"></div>
+                
+                <div class="text-center mb-10">
+                    <h2 class="text-3xl font-bold mb-4 text-depth">Join the Waitlist</h2>
+                    <p class="text-zinc-400">Secure your spot for the next generation of AI-driven productivity.</p>
+                </div>
+
+                <form id="waitlistForm" class="space-y-6">
+                    <div>
+                        <label class="block text-sm font-medium text-zinc-400 mb-2">Full Name</label>
+                        <input type="text" id="userName" required class="w-full px-4 py-3 rounded-xl bg-white/5 border border-white/10 text-white focus:border-primary-container outline-none" placeholder="John Doe">
+                    </div>
+                    <div>
+                        <label class="block text-sm font-medium text-zinc-400 mb-2">Email Address</label>
+                        <input type="email" id="userEmail" required class="w-full px-4 py-3 rounded-xl bg-white/5 border border-white/10 text-white focus:border-primary-container outline-none" placeholder="john@example.com">
+                    </div>
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                        <div>
+                            <label class="block text-sm font-medium text-zinc-400 mb-2">Age Range</label>
+                            <select id="userAge" required class="w-full px-4 py-3 rounded-xl bg-white text-black border-none outline-none font-medium">
+                                <option value="">Select</option>
+                                <option value="18-24">18-24</option>
+                                <option value="25-34">25-34</option>
+                                <option value="35-44">35-44</option>
+                                <option value="45+">45+</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label class="block text-sm font-medium text-zinc-400 mb-2">Profession</label>
+                            <select id="userProfession" required class="w-full px-4 py-3 rounded-xl bg-white text-black border-none outline-none font-medium">
+                                <option value="">Select</option>
+                                <option value="Founder">Founder</option>
+                                <option value="Developer">Developer</option>
+                                <option value="Designer">Designer</option>
+                                <option value="Manager">Manager</option>
+                                <option value="Student">Student</option>
+                                <option value="Other">Other</option>
+                            </select>
+                        </div>
+                    </div>
+                    <button type="submit" class="w-full bg-primary-container text-white py-4 rounded-xl font-bold hover:shadow-[0_0_40px_rgba(74,63,122,0.4)] transition-all duration-300 transform hover:scale-[1.02] active:scale-95">
+                        Reserve My Spot
+                    </button>
+                </form>
+
+                <div id="successWaitlistMessage" class="hidden text-center py-12">
+                    <span class="material-symbols-outlined text-green-500 text-6xl mb-4">check_circle</span>
+                    <h2 class="text-2xl font-bold mb-2">You're on the list!</h2>
+                    <p class="text-zinc-400">We'll reach out to you as soon as early access is available.</p>
+                </div>
+            </div>
+        </section>
+    </div>
+</section>
+
+<!-- Footer -->
+<footer class="w-full py-16 md:py-20 border-t border-white/5 bg-black">
+<div class="max-w-7xl mx-auto px-6 md:px-12 flex flex-col md:flex-row justify-between items-start">
+<div class="mb-8 md:mb-0">
+<span class="text-lg font-black text-white mb-6 block">PartnerAI</span>
+<p class="font-['Inter'] text-xs font-light tracking-wide text-zinc-600">© 2024 PartnerAI. Engineered for intelligence.</p>
+</div>
+<div class="flex flex-wrap gap-x-6 gap-y-4">
+<a class="font-['Inter'] text-xs font-light tracking-wide text-zinc-600 hover:text-purple-400 transition-colors duration-200" href="#">Privacy Policy</a>
+<a class="font-['Inter'] text-xs font-light tracking-wide text-zinc-600 hover:text-purple-400 transition-colors duration-200" href="#">Terms of Service</a>
+<a class="font-['Inter'] text-xs font-light tracking-wide text-zinc-600 hover:text-purple-400 transition-colors duration-200" href="#">Contact</a>
+<a class="font-['Inter'] text-xs font-light tracking-wide text-zinc-600 hover:text-purple-400 transition-colors duration-200" href="#">Twitter</a>
+<a class="font-['Inter'] text-xs font-light tracking-wide text-zinc-600 hover:text-purple-400 transition-colors duration-200" href="#">LinkedIn</a>
+</div>
+</div>
+</footer>
+<script>
+    // Mouse interaction for waves - refined for organic feel
+    const hero = document.getElementById('hero-section');
+    const wave1 = document.getElementById('interactive-wave-1');
+    const wave2 = document.getElementById('interactive-wave-2');
+
+    let mouseX = 0, mouseY = 0;
+    let currentX1 = 0, currentY1 = 0;
+    let currentX2 = 0, currentY2 = 0;
+
+    hero.addEventListener('mousemove', (e) => {
+        const { clientX, clientY } = e;
+        const { innerWidth, innerHeight } = window;
+        
+        mouseX = (clientX / innerWidth) - 0.5;
+        mouseY = (clientY / innerHeight) - 0.5;
+    });
+
+    function animate() {
+        const intensity1 = 60;
+        const intensity2 = 80;
+
+        // Smooth interpolation for wave movement
+        // We use translate3d on the containers, combined with the CSS animation
+        currentX1 += (mouseX * intensity1 - currentX1) * 0.05;
+        currentY1 += (mouseY * intensity1 - currentY1) * 0.05;
+        currentX2 += (mouseX * -intensity2 - currentX2) * 0.05;
+        currentY2 += (mouseY * intensity2 - currentY2) * 0.05;
+
+        // Note: The CSS 'wave-flow' animation is applied to the containers.
+        // Here we just add the mouse-driven offset without breaking the transform chain.
+        // Since 'wave-flow' uses translateX, we apply the mouse Y and some extra X offset here.
+        // To keep the infinite CSS animation working, we wrap the wave in a parent or manage the transform carefully.
+        // Re-applying transform directly will overwrite CSS animation. 
+        // Instead, let's just use CSS for the flow and JS for the 'float' feel if needed, 
+        // but for simplicity and performance in this specific task, we'll let the CSS handle the flow.
+        
+        // Adjusting: We apply the mouse offset to an inner element or just use CSS for the movement
+        // for a truly seamless loop. For this task, keeping the flow in CSS is safest for 'seamless'.
+        // Let's apply mouse offset to the SVG inside the container instead.
+        
+        const svg1 = wave1.querySelector('svg');
+        const svg2 = wave2.querySelector('svg');
+        
+        if (svg1) svg1.style.transform = `translate3d(${currentX1}px, ${currentY1}px, 0)`;
+        if (svg2) svg2.style.transform = `translate3d(${currentX2}px, ${currentY2}px, 0)`;
+        requestAnimationFrame(animate);
+    }
+    animate();
+
+    // Handle mouse leave
+    hero.addEventListener('mouseleave', () => {
+        mouseX = 0;
+        mouseY = 0;
+    });
+
+    // Waitlist Form Logic
+    const wForm = document.getElementById('waitlistForm');
+    const wSuccess = document.getElementById('successWaitlistMessage');
+
+    if (wForm) {
+        wForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+            const userData = {
+                name: document.getElementById('userName').value,
+                email: document.getElementById('userEmail').value,
+                age: document.getElementById('userAge').value,
+                profession: document.getElementById('userProfession').value,
+                date: new Date().toLocaleString()
+            };
+            let waitlist = JSON.parse(localStorage.getItem('partnerai_waitlist') || '[]');
+            waitlist.push(userData);
+            localStorage.setItem('partnerai_waitlist', JSON.stringify(waitlist));
+            wForm.classList.add('hidden');
+            wSuccess.classList.remove('hidden');
+        });
+    }
+
+    // Smooth Scroll for anchor links
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener('click', function (e) {
+            const targetId = this.getAttribute('href');
+            if (targetId === '#') return;
+            const targetElement = document.querySelector(targetId);
+            if (targetElement) {
+                e.preventDefault();
+                targetElement.scrollIntoView({
+                    behavior: 'smooth'
+                });
+            }
+        });
+    });
+</script>
+</body></html>

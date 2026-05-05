@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en" class="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard | PartnerAI</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        body { font-family: 'Inter', sans-serif; background-color: #000; color: #fff; min-h-screen p-8; }
+        .glass-panel { background: rgba(255, 255, 255, 0.03); backdrop-filter: blur(20px); border: 1px solid rgba(255, 255, 255, 0.1); }
+        table { width: 100%; border-collapse: collapse; }
+        th, td { text-align: left; padding: 1rem; border-bottom: 1px solid rgba(255, 255, 255, 0.05); }
+        th { color: #4a3f7a; font-size: 0.8rem; text-transform: uppercase; letter-spacing: 0.1em; }
+    </style>
+</head>
+<body class="bg-black">
+    <div id="accessDenied" class="flex items-center justify-center min-h-screen text-center">
+        <div>
+            <h1 class="text-6xl font-bold mb-4">404</h1>
+            <p class="text-zinc-500">Page not found.</p>
+        </div>
+    </div>
+
+    <div id="adminContent" class="hidden max-w-6xl mx-auto py-12">
+        <div class="flex justify-between items-center mb-12">
+            <div>
+                <h1 class="text-3xl font-bold mb-2">Waitlist Admin</h1>
+                <p class="text-zinc-500">View and manage early access registrations.</p>
+            </div>
+            <button onclick="clearData()" class="bg-red-500/10 text-red-500 border border-red-500/20 px-4 py-2 rounded-lg hover:bg-red-500/20 transition-colors">Clear All Data</button>
+        </div>
+
+        <div class="glass-panel rounded-2xl overflow-hidden">
+            <table id="dataTable">
+                <thead>
+                    <tr>
+                        <th>Date</th>
+                        <th>Name</th>
+                        <th>Email</th>
+                        <th>Age</th>
+                        <th>Profession</th>
+                    </tr>
+                </thead>
+                <tbody id="dataBody">
+                    <!-- Data will be injected here -->
+                </tbody>
+            </table>
+            <div id="noData" class="hidden p-20 text-center text-zinc-600 italic">
+                No users have joined the waitlist yet.
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const urlParams = new URLSearchParams(window.location.search);
+        const code = urlParams.get('code');
+
+        if (code === 'cod7') {
+            document.getElementById('accessDenied').classList.add('hidden');
+            document.getElementById('adminContent').classList.remove('hidden');
+            loadData();
+        }
+
+        function loadData() {
+            const waitlist = JSON.parse(localStorage.getItem('partnerai_waitlist') || '[]');
+            const tbody = document.getElementById('dataBody');
+            const noData = document.getElementById('noData');
+
+            if (waitlist.length === 0) {
+                noData.classList.remove('hidden');
+                return;
+            }
+
+            tbody.innerHTML = waitlist.reverse().map(user => `
+                <tr>
+                    <td class="text-xs text-zinc-500">${user.date}</td>
+                    <td class="font-bold text-white">${user.name}</td>
+                    <td class="text-zinc-400">${user.email}</td>
+                    <td class="text-zinc-400">${user.age}</td>
+                    <td class="text-zinc-400">${user.profession}</td>
+                </tr>
+            `).join('');
+        }
+
+        function clearData() {
+            if (confirm('Are you sure you want to clear all registrations?')) {
+                localStorage.removeItem('partnerai_waitlist');
+                loadData();
+                document.getElementById('dataBody').innerHTML = '';
+            }
+        }
+    </script>
+</body>
+</html>
